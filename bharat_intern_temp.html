@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Temperature Converter</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background-image: url('https://png.pngtree.com/thumb_back/fh260/back_our/20190628/ourmid/pngtree-simple-atmospheric-blue-temperature-needle-illustration-background-image_279280.jpg');
+                background-size: cover;
+                background-position: center;
+                font-family: Arial, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+    
+            .card {
+                background-color: rgba(40, 200, 128, 0.8);
+                padding: 20px;
+                border-radius: 10px;
+                text-align: center;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                margin-left: 10%; /* Adjust the margin to move the card to the left */
+                width: 40%; /* Adjust the width to increase the card's width */
+                position:absolute;
+                top:40%;
+                left:100px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="card">
+            <h1>Temperature Converter</h1>
+            <form>
+                From &nbsp;<select id="fromtemp" name="fromtemp">
+                    <option value="F">Fahrenheit</option>
+                    <option value="C">Celsius</option>
+                    <option value="K">Kelvin</option>
+                </select>&nbsp;
+                To  &nbsp;<select id="totemp" name="totemp">
+                    <option value="F">Fahrenheit</option>
+                    <option value="C">Celsius</option>
+                    <option value="K">Kelvin</option>
+                </select>
+                <p>Enter the temperature</p>
+                <input type="text" id="tempvalue" name="tempvalue"><br><br>
+                <input type="text" id="convertedValue" readonly></input><br><br>
+                <button type="button" onclick="calculateTemperature()">Convert</button>
+                <button type="button" onclick="clearall()">Clear</button>
+            </form>
+        </div>
+</center>
+    <script>
+        function calculateTemperature() {
+            var from = document.getElementById('fromtemp').value;
+            var to = document.getElementById('totemp').value;
+            var value = parseFloat(document.getElementById('tempvalue').value);
+            var result;
+
+            if (from === 'F') 
+            {
+                if (to === 'F') 
+                {
+                    result = value;
+                } 
+                else if (to === 'C')
+                {
+                    result = (value - 32) / 1.8;
+                } 
+                else if (to === 'K')
+                {
+                    result = (value - 32) / 1.8 + 273;
+                }
+            } 
+            else if (from === 'C')
+            {
+                if (to === 'F') 
+                {
+                    result = value * 1.8 + 32;
+                }
+                else if (to === 'C')
+                {
+                    result = value;
+                } 
+                else if (to === 'K')
+                {
+                    result = value + 273;
+                }
+            } 
+            else if (from === 'K') 
+            {
+                if (to === 'F')
+                {
+                    result = (value - 273) * 1.8 + 32;
+                } 
+                else if (to === 'C')
+                {
+                    result = value - 273;
+                } 
+                else if (to === 'K') 
+                {
+                    result = value;
+                }
+            }
+
+            document.getElementById('convertedValue').value= result;
+        }
+
+        function clearall()
+        {
+            document.getElementById('convertedValue').value='';
+            document.getElementById('tempvalue').value='';
+        }
+    </script>
+</body>
+</html>
